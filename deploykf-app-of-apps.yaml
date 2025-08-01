@@ -7,7 +7,6 @@ metadata:
 spec:
   project: default
   source:
-    # deployKF 공식 리포지토리 대신 사용자님의 리포지토리를 사용합니다.
     repoURL: "https://github.com/jjdevhub/deployKF"
     targetRevision: "main"
     path: "."
