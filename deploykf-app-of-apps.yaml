@@ -1,19 +1,25 @@
+# deploykf-app-of-apps.yaml 파일 내용 (수정됨)
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: deploykf
+  name: deploykf-app-of-apps
   namespace: argocd
 spec:
-  destination:
-    namespace: deploykf
-    server: https://kubernetes.default.svc
   project: default
   source:
-    path: deploykf
+    # deployKF 공식 리포지토리 대신 사용자님의 리포지토리를 사용합니다.
+    repoURL: "https://github.com/jjdevhub/deployKF"
+    targetRevision: "main"
+    path: "."
     plugin:
-      name: deploykf
-    repoURL: https://github.com/jjdevhub/deployKF
-    targetRevision: main
+      name: "deploykf"
+      parameters:
+      - name: "values_files"
+        array:
+        - "./my-values.yaml"
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true
